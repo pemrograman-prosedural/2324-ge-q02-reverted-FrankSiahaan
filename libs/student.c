@@ -55,7 +55,8 @@ void print_student_detail(struct student_t *_student, int jumlah){
     }
 }
 
-void assign_student(struct student_t *_student, struct dorm_t *_dorm, char *id, char *names) {
+void assign_student(struct student_t *_student, struct dorm_t *_dorm, char *id, char *names, int student_index, int dorm_index) {
+    if (student_index != -1 && dorm_index != -1) {
     if (_dorm->gender == _student->gender)
     {
         if (_dorm->capacity > _dorm->residents_num)
@@ -65,6 +66,7 @@ void assign_student(struct student_t *_student, struct dorm_t *_dorm, char *id, 
         }
     } else {
         _student->dorm = NULL;
+    }
     }
     
 }

@@ -109,6 +109,8 @@ int main(int _argc, char **_argv)
                 token = strtok(NULL, "#");
                 strcpy(names, token);
 
+                student_index = -1;
+                dorm_index = -1;
                 for (int s = 0; s < i; ++s)
                 {
                     if (strcmp(students[s].id, id) == 0)
@@ -125,7 +127,7 @@ int main(int _argc, char **_argv)
                         break;   
                     }
                 }   
-                assign_student(&students[student_index], &dorms[dorm_index], id, names);
+                assign_student(&students[student_index], &dorms[dorm_index], id, names, student_index, dorm_index);
             } else if (strcmp(token, "move-student") == 0) {
                 token = strtok(NULL, "#");
                 strcpy(id, token);
@@ -151,7 +153,7 @@ int main(int _argc, char **_argv)
                 }
                 if (students[student_index].dorm == NULL)
                 {
-                    assign_student(&students[student_index], &dorms[dorm_index], id, names);
+                    assign_student(&students[student_index], &dorms[dorm_index], id, names, student_index, dorm_index);
                 } else {
                         for (int c = 0; c < j; c++)
                         {
