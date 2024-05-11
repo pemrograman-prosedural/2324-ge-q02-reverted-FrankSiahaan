@@ -20,9 +20,9 @@ int main(int _argc, char **_argv)
     int j = 0;
     int student_index = -1;
     int dorm_index = -1;
-    int oldindex = 0;
+    int oldindex = -1;
     char names1[200];
-    int dorm_index1 = 0;
+    int dorm_index1 = -1;
     
 
     while (1)
@@ -154,24 +154,24 @@ int main(int _argc, char **_argv)
                 {
                     assign_student(&students[student_index], &dorms[dorm_index], id, names);
                 } else {
-                    for (int b = 0; b <= j; b++)
-                    {
-                        if (strcmp(students[b].dorm->name, dorms[b].name) == 0)
+                        for (int c = 0; c < j; c++)
                         {
-                            oldindex = b;
+                        if (strcmp(students[student_index].dorm->name, dorms[c].name) == 0)
+                        {
+                            oldindex = c;
                             break;
                         }
+                        }
                         move_student(&students[student_index], &dorms[dorm_index] ,&dorms[oldindex], dorm_index, oldindex, student_index);
-
-                    }                    
+                   
                 }
             } else if (strcmp(token, "dorm-empty") == 0) {
                 token = strtok(NULL, "#");
                 strcpy(names1, token);
 
-                for (int x = 0; x < j; x++)
+                for (int x = 0; x < i; x++)
                 {
-                    if (strcmp(dorms[x].name, names1) == 0)
+                    if (strcmp(students[x].dorm->name, names1) == 0)
                     {
                         dorm_index1 = x;
                         break;

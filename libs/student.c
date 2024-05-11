@@ -71,22 +71,24 @@ void assign_student(struct student_t *_student, struct dorm_t *_dorm, char *id, 
 }
 
 void move_student(struct student_t *_student, struct dorm_t *new_dorm ,struct dorm_t *old_dorm, int dorm_index, int oldindex, int student_index) {
-  if (new_dorm->gender == _student->gender)
+  if (new_dorm[dorm_index].gender == _student[student_index].gender)
     {
-        if (new_dorm->capacity > new_dorm->residents_num)
+        if (new_dorm[dorm_index].capacity != new_dorm[dorm_index].residents_num)
         {
-            new_dorm[dorm_index].residents_num++;
-            strcpy(_student[student_index].dorm->name, new_dorm->name);
             old_dorm[oldindex].residents_num--;
-        }   
-        
+            strcpy(_student[student_index].dorm->name, new_dorm->name);
+            new_dorm[dorm_index].residents_num++;
+        }
     }
 }
 void dorm_empty(struct student_t *_student, struct dorm_t *_dorm, int jumlah, char *names1, int student_index){
     for (int i = 0; i < student_index; i++)
     {
-        strcpy(_student[i].dorm->name, "unassigned");
-        _dorm[i].residents_num--;        
+        if (strcmp(_student[i].dorm->name, names1) == 0)
+        {
+            strcpy(_student[i].dorm->name, "unassigned");
+            _dorm[jumlah].residents_num--;
+        }       
     }
     
 }
