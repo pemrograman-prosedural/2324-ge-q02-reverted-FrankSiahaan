@@ -22,7 +22,6 @@ int main(int _argc, char **_argv)
     int dorm_index = -1;
     int oldindex = -1;
     char names1[200];
-    int dorm_index1 = -1;
     
 
     while (1)
@@ -166,18 +165,16 @@ int main(int _argc, char **_argv)
                    
                 }
             } else if (strcmp(token, "dorm-empty") == 0) {
-                token = strtok(NULL, "#");
+               token = strtok(NULL, "#");
                 strcpy(names1, token);
 
-                for (int x = 0; x < i; x++)
-                {
-                    if (strcmp(students[x].dorm->name, names1) == 0)
-                    {
-                        dorm_index1 = x;
+                for (int x = 0; x < j; x++) {
+                    if (strcmp(names1 ,dorms[x].name) == 0) {
+                        dorm_index = x;
+                        dorm_empty(students, dorms, i, j, names1);
                         break;
                     }
                 }
-                dorm_empty(&students[student_index], &dorms[dorm_index1], dorm_index1, names1, student_index);
             }
         }
     }

@@ -70,26 +70,30 @@ void assign_student(struct student_t *_student, struct dorm_t *_dorm, char *id, 
     
 }
 
-void move_student(struct student_t *_student, struct dorm_t *new_dorm ,struct dorm_t *old_dorm, int dorm_index, int oldindex, int student_index) {
-  if (new_dorm[dorm_index].gender == _student[student_index].gender)
-    {
-        if (new_dorm[dorm_index].capacity != new_dorm[dorm_index].residents_num)
-        {
-            old_dorm[oldindex].residents_num--;
-            strcpy(_student[student_index].dorm->name, new_dorm->name);
+void move_student(struct student_t *_student, struct dorm_t *_dorm, struct dorm_t *new_dorm, int dorm_index, int oldindex, int student_index) {
+    if (new_dorm[dorm_index].gender == _student[student_index].gender) {
+        if (new_dorm[dorm_index].capacity != new_dorm[dorm_index].residents_num) {
+            _dorm[oldindex].residents_num--;
+            _student[student_index].dorm = new_dorm;
             new_dorm[dorm_index].residents_num++;
         }
     }
 }
-void dorm_empty(struct student_t *_student, struct dorm_t *_dorm, int jumlah, char *names1, int student_index){
-    for (int i = 0; i < student_index; i++)
-    {
-        if (strcmp(_student[i].dorm->name, names1) == 0)
-        {
-            strcpy(_student[i].dorm->name, "unassigned");
-            _dorm[jumlah].residents_num--;
-        }       
-    }
-    
-}
 
+void dorm_empty(struct student_t *_student, struct dorm_t *_dorm, int jumlah_students, int jumlah_dorm, char *dorm_name) {
+    int dorm_index = -1;
+    for (int i = 0; i < jumlah_dorm; i++) {
+        if (strcmp(_dorm[i].name, dorm_name) == 0) {
+            dorm_index = i;
+            break;
+        }
+    }
+    if (dorm_index != -1) {
+        for (int i = 0; i < jumlah_students; i++) {
+            if (_student[i].dorm != NULL && strcmp(_student[i].dorm->name, dorm_name) == 0) {
+                _student[i].dorm = NULL;
+            }
+        }
+        _dorm[dorm_index].residents_num = 0;
+    }
+}
