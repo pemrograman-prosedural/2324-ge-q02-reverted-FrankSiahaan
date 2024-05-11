@@ -62,10 +62,9 @@ void assign_student(struct student_t *_student, struct dorm_t *_dorm, char *id, 
         {
             _student->dorm = _dorm;
             _dorm->residents_num++;
-        } else {
-            _student->dorm = NULL;
         }
-        
+    } else {
+        _student->dorm = NULL;
     }
     
 }
