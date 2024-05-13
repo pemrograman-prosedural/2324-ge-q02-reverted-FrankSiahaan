@@ -71,14 +71,18 @@ void assign_student(struct student_t *_student, struct dorm_t *_dorm, char *id, 
     
 }
 
-void move_student(struct student_t *_student, struct dorm_t *_dorm, struct dorm_t *new_dorm, int dorm_index, int oldindex, int student_index) {
-    if (new_dorm[dorm_index].gender == _student[student_index].gender) {
-        if (new_dorm[dorm_index].capacity != new_dorm[dorm_index].residents_num) {
+void move_student(struct student_t *_student, struct dorm_t *_dorm, int dorm_index, int oldindex, int student_index) {
+    if (dorm_index != -1 && oldindex != -1)
+    {
+    if (_dorm[dorm_index].gender == _student[student_index].gender) {
+        if (_dorm[dorm_index].capacity > _dorm[dorm_index].residents_num) {
             _dorm[oldindex].residents_num--;
-            _student[student_index].dorm = new_dorm;
-            new_dorm[dorm_index].residents_num++;
+            _student->dorm = _dorm;
+            _dorm[dorm_index].residents_num++;
         }
     }
+    }
+    
 }
 
 void dorm_empty(struct student_t *_student, struct dorm_t *_dorm, int jumlah_students, int jumlah_dorm, char *dorm_name) {
