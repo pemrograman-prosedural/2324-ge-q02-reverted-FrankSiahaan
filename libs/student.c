@@ -77,7 +77,7 @@ void move_student(struct student_t *_student, struct dorm_t *_dorm, int dorm_ind
     if (_dorm[dorm_index].gender == _student[student_index].gender) {
         if (_dorm[dorm_index].capacity > _dorm[dorm_index].residents_num) {
             _dorm[oldindex].residents_num--;
-            _student->dorm = _dorm;
+            _student[student_index].dorm = &_dorm[dorm_index];
             _dorm[dorm_index].residents_num++;
         }
     }
